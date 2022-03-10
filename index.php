@@ -1,18 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belajar BE</title>
-</head>
-<body>
-    <?php 
-        $first = 1;
-        $second = 3;
+<?php
+require 'functions.php';
 
-        echo "Hasil dari penjumlahan $first + $second adalah ".($first+$second);
+$person = new Person();
 
-    ?>
-</body>
-</html>
+// Create Data
+$person->setName("John");
+$person->setBirth("1 January 2000");
+$person->setAge(10);
+
+// Get Data
+echo $person->getName()."<br>";
+echo $person->getBirth()."<br>";
+echo $person->getAge()."<br>";
+
+echo "<br>";
+
+// Create or Update
+$person->setName("Anne");
+$person->setBirth("10 June 1999");
+$person->setAge(23);
+
+// Get Data
+echo $person->getName()."<br>";
+echo $person->getBirth()."<br>";
+echo $person->getAge()."<br>";
+
+// Delete Data
+echo $person->deleteName();
+
+// Get Data
+echo $person->getName();
+
+// Update Data
+echo $person->updateName("Foo Bar")."<br>";
+
+// Get Data
+echo $person->getName()."<br>";
