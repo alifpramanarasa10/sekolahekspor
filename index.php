@@ -33,6 +33,3 @@ echo $person->getName();
 
 // Update Data
 echo $person->updateName("Foo Bar")."<br>";
-
-// Get Data
-echo $person->getName()."<br>";
