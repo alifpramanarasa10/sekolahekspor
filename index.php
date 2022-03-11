@@ -1,35 +1,43 @@
 <?php
-require 'functions.php';
+    require "connection.php";
+    
+    $query_mysql = mysqli_query($host,"SELECT id,nama,alamat,pekerjaan FROM user")or die(mysqli_error());
 
-$person = new Person();
+    // mysqli_fetch_assoc => Array Asosiatif
+    // mysqli_fetch_row => Array Numeric
+    // mysqli_fetch_array => Mix
+    // mysqli_fetch_object => Object
+    
+?>
 
-// Create Data
-$person->setName("John");
-$person->setBirth("1 January 2000");
-$person->setAge(10);
+<h3>Data user</h3>
+<a class="tombol" href="create.php">+ Tambah Data Baru</a>
+<table border="1" class="table">
+    <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Alamat</th>
+        <th>Pekerjaan</th>		
+        <th>Opsi</th>		
+    </tr>
+    <?php 
 
-// Get Data
-echo $person->getName()."<br>";
-echo $person->getBirth()."<br>";
-echo $person->getAge()."<br>";
+    $num = 1;
+        
+    while($dataUser = mysqli_fetch_array($query_mysql)){
 
-echo "<br>";
-
-// Create or Update
-$person->setName("Anne");
-$person->setBirth("10 June 1999");
-$person->setAge(23);
-
-// Get Data
-echo $person->getName()."<br>";
-echo $person->getBirth()."<br>";
-echo $person->getAge()."<br>";
-
-// Delete Data
-echo $person->deleteName();
-
-// Get Data
-echo $person->getName();
-
-// Update Data
-echo $person->updateName("Foo Bar")."<br>";
+    ?>
+    <tr>
+        <td><?php echo $num++; ?></td>
+        <td><?php echo $dataUser['nama']; ?></td>
+        <td><?php echo $dataUser['alamat']; ?></td>
+        <td><?php echo $dataUser['pekerjaan']; ?></td>
+        <td>
+            <a class="edit" href="edit.php?id=<?php echo $dataUser['id']; ?>">Edit</a> |
+            <a class="hapus" href="delete.php?id=<?php echo $dataUser['id']; ?>">Hapus</a>					
+        </td>
+    </tr>
+    <?php 
+        } 
+    ?>
+</table>
